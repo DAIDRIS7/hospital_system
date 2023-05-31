@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hospital/features/loading/view/view.dart';
-import '';
 
 class SplashScreen extends StatelessWidget {
   final prototype = [
@@ -57,7 +56,7 @@ class SplashScreen extends StatelessWidget {
                     child: Text(
                       maxLines: 1,
                       textAlign: TextAlign.center,
-                      prototype[index] ?? 'DAIDRIS7',
+                      prototype[index],
                     ),
                   ),
                 );

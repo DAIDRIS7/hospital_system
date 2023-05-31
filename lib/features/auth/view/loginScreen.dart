@@ -28,8 +28,12 @@ _bodyWidget(context) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            'assets/logo/logo2.png',
+          Stack(
+            children: [
+              Image.asset(
+                'assets/logo/logo2.png',
+              ),
+            ],
           ),
           SizedBox(
             height: 7,
