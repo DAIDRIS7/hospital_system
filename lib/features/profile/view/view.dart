@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProfileInfo extends StatelessWidget {
+  final userSpecialist;
+
+  const ProfileInfo({super.key, required this.userSpecialist});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,12 +15,12 @@ class ProfileInfo extends StatelessWidget {
         centerTitle: true,
         elevation: 1,
       ),
-      body: _bodyWidget(context),
+      body: _bodyWidget(context, userSpecialist),
     );
   }
 }
 
-_bodyWidget(context) {
+_bodyWidget(context, userSpecialist) {
   return SafeArea(
     child: Stack(
       children: [
@@ -38,7 +41,7 @@ _bodyWidget(context) {
             children: [
               _iconText(
                 iconData: Icons.local_hospital,
-                info: 'Specialist - Doctor',
+                info: 'Specialist - $userSpecialist',
               ),
               _iconText(
                 iconData: Icons.male,

@@ -5,9 +5,15 @@ import 'package:hospital/features/cases/view/view.dart';
 import 'package:hospital/features/notification/view/view.dart';
 import 'package:hospital/features/profile/view/view.dart';
 import 'package:hospital/features/reports/view/view.dart';
+import 'package:hospital/features/splash/model/model.dart';
 import 'package:hospital/features/tasks/view/view.dart';
 
 class Homepage extends StatelessWidget {
+  final userSpecialist;
+  bool isHasAccess;
+
+  Homepage(
+      {super.key, required this.userSpecialist, required this.isHasAccess});
   List specialist = [
     [
       Colors.blue,
@@ -42,12 +48,13 @@ class Homepage extends StatelessWidget {
     ],
     [
       CallsPage(),
-      TasksPage(),
+      TasksPage(
+          //    userSpecialist: userSpecialist,
+          ),
       ReportsPage(),
       AttendanceAndLeaving(),
       CasesPage(),
     ],
-    [],
   ];
   @override
   Widget build(BuildContext context) {
@@ -59,7 +66,8 @@ class Homepage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProfileInfo(),
+                  builder: (context) =>
+                      ProfileInfo(userSpecialist: userSpecialist),
                 ),
               );
             },
@@ -76,15 +84,31 @@ class Homepage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProfileInfo(),
+                  builder: (context) =>
+                      ProfileInfo(userSpecialist: userSpecialist),
                 ),
               );
             },
-            child: Text(
-              'DAIDRIS7',
-              style: TextStyle(
-                color: Colors.black,
-              ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'DAIDRIS7',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(
+                  height: 7,
+                ),
+                Text(
+                  'Specialist, $userSpecialist',
+                  style: TextStyle(
+                    fontSize: 7,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
           ),
           actions: [
@@ -98,13 +122,14 @@ class Homepage extends StatelessWidget {
                   );
                 },
                 child: Icon(
+                  color: Colors.black,
                   Icons.notifications,
                 )),
           ],
           elevation: 1),
       body: SafeArea(
         child: GridView.builder(
-          itemCount: specialist.length,
+          itemCount: isHasAccess ? specialist.length + 1 : specialist.length,
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {

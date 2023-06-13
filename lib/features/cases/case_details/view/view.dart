@@ -57,9 +57,7 @@ _bodyWidget(context) {
       Expanded(
         child: TabBarView(children: [
           _caseTab(context),
-          Icon(
-            Icons.fingerprint,
-          ),
+          _recordTab(context),
           _measurementTab(context),
         ]),
       ),
@@ -226,6 +224,72 @@ _caseTab(context) {
 }
 
 _measurementTab(context) {
+  return Column(
+    children: [
+      ListTile(
+        leading: Image.asset(
+          'assets/images/daidris7.jpg',
+          fit: BoxFit.cover,
+        ),
+        title: Text(
+          'DAIDRIS7',
+        ),
+        subtitle: Text(
+          'Specialist-Nurse',
+        ),
+        trailing: Text(
+          '7/7/7777',
+        ),
+      ),
+      SizedBox(
+        height: 7,
+      ),
+      Container(
+          child: Text(
+        'Details Note:DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 DAIDRIS7 ',
+      )),
+      Row(
+        children: [
+          Text(
+            'Medical Record',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 7,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Blood Pressure',
+          ),
+          Text(
+            '120',
+          ),
+        ],
+      ),
+      SizedBox(height: 7),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Sugar Analyze',
+          ),
+          Text(
+            '129',
+          ),
+        ],
+      ),
+    ],
+  );
+}
+
+_recordTab(context) {
   return Column(
     children: [
       ListTile(

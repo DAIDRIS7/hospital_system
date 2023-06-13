@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
 
-class SelectPerson extends StatelessWidget {
+class SelectPerson extends StatefulWidget {
+  @override
+  State<SelectPerson> createState() => _SelectPersonState();
+}
+
+class _SelectPersonState extends State<SelectPerson> {
+  bool isSelected = false;
+
+  _isSelected() {
+    setState(() {
+      isSelected = !isSelected;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,17 +22,17 @@ class SelectPerson extends StatelessWidget {
           'Select Person',
         ),
       ),
-      body: _bodyWidget(),
+      body: _bodyWidget(context, _isSelected, isSelected),
     );
   }
 }
 
-_bodyWidget() {
+_bodyWidget(context, _isSelected, isSelected) {
   return SafeArea(
     child: Column(
       children: [
         _searchBar(),
-        _selectionPerson(),
+        _selectionPerson(context, _isSelected, isSelected),
         ElevatedButton(
           onPressed: () {},
           child: Text(
@@ -43,8 +56,9 @@ _searchBar() {
   );
 }
 
-_selectionPerson() {
+_selectionPerson(context, _isSelected, isSelected) {
   return ListTile(
+    onTap: _isSelected,
     leading: Image.asset(
       'assets/images/daidris7.jpg',
       fit: BoxFit.cover,
@@ -55,8 +69,13 @@ _selectionPerson() {
     subtitle: Text(
       'GOAT',
     ),
-    trailing: Icon(
-      Icons.favorite,
+    trailing: CircleAvatar(
+      radius: 7 + 7,
+      backgroundColor: Colors.grey[300],
+      child: CircleAvatar(
+        radius: 7,
+        backgroundColor: isSelected == true ? Colors.green : Colors.grey[300],
+      ),
     ),
   );
 }

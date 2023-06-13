@@ -87,8 +87,32 @@ class MedicalRecord extends StatelessWidget {
               ],
             ),
           ),
+          _caseOfrecord(),
         ],
       ),
     );
   }
+}
+
+_caseOfrecord() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      ElevatedButton(
+        onPressed: () {},
+        child: Text(
+          'Accept',
+        ),
+      ),
+      ElevatedButton(
+        onPressed: () {},
+        child: Text(
+          'Busy',
+        ),
+        style: ElevatedButton.styleFrom(
+          primary: Colors.amber,
+        ),
+      ),
+    ],
+  );
 }

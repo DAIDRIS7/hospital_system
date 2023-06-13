@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hospital/features/loading/view/view.dart';
+import 'package:hospital/features/splash/model/model.dart';
 
 class SplashScreen extends StatelessWidget {
   final prototype = [
-    'Doctor',
-    'Reseption',
-    'Nurse',
-    'Analyze Employee',
-    'Manager',
-    'HR',
+    UserSpecialist().doctor,
+    UserSpecialist().reseption,
+    UserSpecialist().nurse,
+    UserSpecialist().analyzeEmployee,
+    UserSpecialist().manager,
+    UserSpecialist().hr,
   ];
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,8 @@ class SplashScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoadingScreen(),
+                        builder: (context) =>
+                            LoadingScreen(userSpecialist: prototype[index]),
                       ),
                     );
                   },

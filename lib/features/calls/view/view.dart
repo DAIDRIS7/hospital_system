@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hospital/features/calls/view/create_call.dart';
 
 class CallsPage extends StatelessWidget {
   @override
@@ -59,8 +60,18 @@ _addCallSection(context) {
         height: MediaQuery.of(context).size.width * 0.16,
         width: MediaQuery.of(context).size.width * 0.1,
         color: Colors.blue,
-        child: Icon(
-          Icons.add,
+        child: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreateCall(),
+              ),
+            );
+          },
+          icon: Icon(
+            Icons.add,
+          ),
         ),
       ),
     ],

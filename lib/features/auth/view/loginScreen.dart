@@ -5,6 +5,9 @@ import 'package:hospital/features/auth/controller/bloc/cubit/states.dart';
 import 'package:hospital/features/home/view/view.dart';
 
 class LogInPage extends StatelessWidget {
+  final userSpecialist;
+  final isHasAccess;
+  const LogInPage({super.key, required this.userSpecialist, this.isHasAccess});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +15,7 @@ class LogInPage extends StatelessWidget {
           bloc: AuthCubit(Success()),
           builder: (context, state) {
             if (state is Success) {
-              return _bodyWidget(context);
+              return _bodyWidget(context, userSpecialist, isHasAccess);
             } else {
               return CircularProgressIndicator();
             }
@@ -21,7 +24,7 @@ class LogInPage extends StatelessWidget {
   }
 }
 
-_bodyWidget(context) {
+_bodyWidget(context, userSpecialist, isHasAccess) {
   return SafeArea(
     child: Container(
       margin: EdgeInsets.all(7 + 7 + 7),
@@ -71,7 +74,10 @@ _bodyWidget(context) {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Homepage(),
+                  builder: (context) => Homepage(
+                    userSpecialist: userSpecialist,
+                    isHasAccess: isHasAccess,
+                  ),
                 ),
               );
             },
