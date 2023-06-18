@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hospital/features/DAIDRIS7/widgets/date_time_picker.dart';
 import 'package:hospital/features/calls/view/create_call.dart';
 
 class CallsPage extends StatelessWidget {
+  DateTime _dateTime = DateTime(1956);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,23 +18,23 @@ class CallsPage extends StatelessWidget {
         elevation: 1,
         centerTitle: true,
       ),
-      body: _bodyWidget(context),
+      body: _bodyWidget(context, _dateTime),
     );
   }
 }
 
-_bodyWidget(context) {
+_bodyWidget(context, _dateTime) {
   return SafeArea(
     child: Column(
       children: [
-        _addCallSection(context),
+        _addCallSection(context, _dateTime),
         _showCallsSection(),
       ],
     ),
   );
 }
 
-_addCallSection(context) {
+_addCallSection(context, _dateTime) {
   return Row(
     mainAxisSize: MainAxisSize.min,
     children: [
@@ -48,7 +50,15 @@ _addCallSection(context) {
           keyboardType: TextInputType.datetime,
           decoration: InputDecoration(
             suffixIcon: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showDatePicker(
+                  context: context,
+                  initialDate: _dateTime,
+                  firstDate: DateTime(1956),
+                  lastDate: DateTime(2030),
+                  currentDate: _dateTime,
+                );
+              },
               icon: Icon(Icons.calendar_month),
             ),
             hintText: 'DAIDRIS7',

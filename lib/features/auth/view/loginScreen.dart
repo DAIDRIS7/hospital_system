@@ -6,8 +6,11 @@ import 'package:hospital/features/home/view/view.dart';
 
 class LogInPage extends StatelessWidget {
   final userSpecialist;
+
   final isHasAccess;
-  const LogInPage({super.key, required this.userSpecialist, this.isHasAccess});
+  final _formKey = GlobalKey<FormState>();
+
+  LogInPage({super.key, required this.userSpecialist, this.isHasAccess});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +18,8 @@ class LogInPage extends StatelessWidget {
           bloc: AuthCubit(Success()),
           builder: (context, state) {
             if (state is Success) {
-              return _bodyWidget(context, userSpecialist, isHasAccess);
+              return _bodyWidget(
+                  context, userSpecialist, isHasAccess, _formKey);
             } else {
               return CircularProgressIndicator();
             }
@@ -24,75 +28,80 @@ class LogInPage extends StatelessWidget {
   }
 }
 
-_bodyWidget(context, userSpecialist, isHasAccess) {
-  return SafeArea(
-    child: Container(
-      margin: EdgeInsets.all(7 + 7 + 7),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Stack(
-            children: [
-              Image.asset(
-                'assets/logo/logo2.png',
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 7,
-          ),
-          Text(
-            'Welcome back',
-          ),
-          SizedBox(
-            height: 7 + 7 + 7,
-          ),
-          _textFormWidget(
-            hintText: 'Phone Number ',
-            prefixIcon: Icon(Icons.phone_iphone),
-          ),
-          SizedBox(
-            height: 7,
-          ),
-          _textFormWidget(
-            hintText: 'Password',
-            prefixIcon: Icon(
-              Icons.lock,
-            ),
-            suffixIcon: Icon(
-              Icons.visibility,
-            ),
-          ),
-          SizedBox(
-            height: 7,
-          ),
-          Text(
-            'Forget password?',
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Homepage(
-                    userSpecialist: userSpecialist,
-                    isHasAccess: isHasAccess,
-                  ),
+_bodyWidget(context, userSpecialist, isHasAccess, _formKey) {
+  return Form(
+    key: _formKey,
+    child: SafeArea(
+      child: Container(
+        margin: EdgeInsets.all(7 + 7 + 7),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(
+              children: [
+                Image.asset(
+                  'assets/logo/logo2.png',
                 ),
-              );
-            },
-            child: Text(
-              'Sign In ',
+              ],
             ),
-          ),
-        ],
+            SizedBox(
+              height: 7,
+            ),
+            Text(
+              'Welcome back',
+            ),
+            SizedBox(
+              height: 7 + 7 + 7,
+            ),
+            _textFormWidget(
+              hintText: 'Phone Number ',
+              prefixIcon: Icon(Icons.phone_iphone),
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            _textFormWidget(
+              hintText: 'Password',
+              prefixIcon: Icon(
+                Icons.lock,
+              ),
+              suffixIcon: Icon(
+                Icons.visibility,
+              ),
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            Text(
+              'Forget password?',
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Homepage(
+                      userSpecialist: userSpecialist,
+                      isHasAccess: isHasAccess,
+                    ),
+                  ),
+                );
+              },
+              child: Text(
+                'Sign In ',
+              ),
+            ),
+          ],
+        ),
       ),
     ),
   );
 }
 
-_textFormWidget({String? hintText, Widget? prefixIcon, Widget? suffixIcon}) {
+_textFormWidget(
+    {String? hintText, Widget? prefixIcon, Widget? suffixIcon, validation}) {
   return TextFormField(
+    validator: validation,
     decoration: InputDecoration(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(

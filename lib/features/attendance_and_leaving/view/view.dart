@@ -4,7 +4,11 @@ import 'package:hospital/features/notification/view/view.dart';
 import 'package:hospital/features/profile/view/view.dart';
 
 class AttendanceAndLeaving extends StatelessWidget {
-  final userSpecialist = 'DAIDRIS7';
+  var userSpecialist;
+  DateTime? dateTime;
+  int? hour, minute;
+  AttendanceAndLeaving(
+      {super.key, this.dateTime, this.hour, this.minute, this.userSpecialist});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,12 +80,12 @@ class AttendanceAndLeaving extends StatelessWidget {
                 )),
           ],
           elevation: 1),
-      body: _bodyWidget(context),
+      body: _bodyWidget(context, dateTime, hour, minute),
     );
   }
 }
 
-_bodyWidget(context) {
+_bodyWidget(context, dateTime, hour, minute) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     mainAxisSize: MainAxisSize.min,
@@ -117,13 +121,13 @@ _bodyWidget(context) {
       SizedBox(
         height: 7,
       ),
-      _fingerPrint(context),
-      _fingerPrint(context),
+      _fingerPrint(context, dateTime, hour, minute),
+      _fingerPrint(context, dateTime, hour, minute),
     ],
   );
 }
 
-_fingerPrint(context) {
+_fingerPrint(context, dateTime, hour, minute) {
   return Container(
     margin: EdgeInsets.all(7 + 7),
     height: MediaQuery.of(context).size.height * 0.2,
@@ -137,7 +141,7 @@ _fingerPrint(context) {
               'DAIDRIS7',
             ),
             Text(
-              '7.7',
+              hour == null ? '77.77' : '$hour:$minute',
             ),
             ElevatedButton(
               onPressed: () {
